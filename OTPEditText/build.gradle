@@ -1,11 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'maven-publish'
+    id 'signing'
 }
-
-//apply plugin: 'maven'
-//apply plugin: 'signing'
-
 
 task androidSourcesJar(type: Jar) {
     classifier = 'sources'
@@ -15,10 +13,6 @@ task androidSourcesJar(type: Jar) {
 artifacts {
     archives androidSourcesJar
 }
-
-//group = "io.github.venkataseshaiahudatha"
-//archivesBaseName = "OTPEditText"
-//version = "1.0.0"
 
 android {
     compileSdkVersion 30
@@ -58,61 +52,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
-//
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-//
-//            repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
-//                authentication(userName: ossrhUsername, password: ossrhPassword)
-//            }
-//
-//            snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-//                authentication(userName: ossrhUsername, password: ossrhPassword)
-//            }
-//
-//            pom.project {
-//                name 'OTPEditText'
-//                packaging 'jar'
-//                // Two artifacts, the `aar` and the sources
-//                //artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-//                //artifact androidSourcesJar
-//                // optionally artifactId can be defined here
-//                description 'An easy to customize OTP Edit view.'
-//                url 'https://github.com/venkataseshaiahudatha/OTPEditText'
-//
-//                scm {
-//                    connection 'scm:git:github.com/venkataseshaiahudatha/OTPEditText.git'
-//                    developerConnection 'scm:git:ssh://github.com/venkataseshaiahudatha/OTPEditText.git'
-//                    url 'https://github.com/venkataseshaiahudatha/OTPEditText/tree/main'
-//                }
-//
-//                licenses {
-//                    license {
-//                        name 'The Apache License, Version 2.0'
-//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                    }
-//                }
-//
-//                developers {
-//                    developer {
-//                        id 'venkataseshaiahudatha'
-//                        name 'Venkata Seshaiah Udatha'
-//                        email 'seshu.mca2004@gmail.com'
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//signing {
-//    sign configurations.archives
-//}
-
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
 
 group=PUBLISH_GROUP_ID
 archivesBaseName=PUBLISH_ARTIFACT_ID
@@ -144,11 +83,6 @@ if (secretPropsFile.exists()) {
 publishing {
     publications {
         release(MavenPublication) {
-            // The coordinates of the library, being set from variables that
-            // we'll set up in a moment
-//            groupId PUBLISH_GROUP_ID
-//            artifactId PUBLISH_ARTIFACT_ID
-//            version PUBLISH_VERSION
 
             // Two artifacts, the `aar` and the sources
             artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
