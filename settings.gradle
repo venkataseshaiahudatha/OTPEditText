@@ -1,2 +1,3 @@
 rootProject.name = "OTPEditTextSample"
 include ':app'
+include ':library'
