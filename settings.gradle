@@ -1,3 +1,4 @@
 rootProject.name = "OTPEditTextSample"
 include ':app'
 include ':OTPEditText'
+include ':langx'

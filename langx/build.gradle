@@ -1,0 +1,39 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+dependencies {
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:3.8.0'
+    testImplementation 'org.mockito:mockito-inline:2.28.2'
+    testImplementation 'com.nhaarman:mockito-kotlin:1.6.0'
+}
+
+apply from: '../lib-artifacts.gradle'
+apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                artifactId "langx"
+                version '0.0.2'
+                pom {
+                    name = 'langx'
+                    description = 'The technology agnostic language\'s extensions'
+                    // If your project has a dedicated site, use its URL here
+                    url = 'https://github.com/venkataseshaiahudatha/OTPEditText'
+                }
+            }
+        }
+
+    }
+}

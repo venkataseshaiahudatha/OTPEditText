@@ -27,7 +27,7 @@ ext["ossrhUsername"] = ''
 ext["ossrhPassword"] = ''
 ext["sonatypeStagingProfileId"] = ''
 
-File secretPropsFile = project.rootProject.file('local.properties')
+File secretPropsFile = project.rootProject.file('local1.properties')
 if (secretPropsFile.exists()) {
     Properties p = new Properties()
     p.load(new FileInputStream(secretPropsFile))
@@ -42,6 +42,12 @@ if (secretPropsFile.exists()) {
     ext["ossrhPassword"] = System.getenv('OSSRH_PASSWORD')
     ext["sonatypeStagingProfileId"] = System.getenv('SONATYPE_STAGING_PROFILE_ID')
 }
+println(ext["signing.keyId"])
+println(ext["signing.password"])
+println(ext["signing.secretKeyRingFile"])
+println(ext["ossrhUsername"])
+println(ext["ossrhPassword"])
+println(ext["sonatypeStagingProfileId"])
 
 
 afterEvaluate {
@@ -52,10 +58,14 @@ afterEvaluate {
                 artifactId PUBLISH_ARTIFACT_ID
                 version PUBLISH_VERSION
 
+                println("PUBLISH_GROUP_ID :"+PUBLISH_GROUP_ID)
+                println("PUBLISH_ARTIFACT_ID :"+PUBLISH_ARTIFACT_ID)
+                println("PUBLISH_VERSION :"+PUBLISH_VERSION)
+
                 if (project.plugins.findPlugin("com.android.library")) {
                     artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
                 } else {
-                    artifact("$buildDir/libs/${project.getName()}-${version}.jar")
+                    artifact("$buildDir/libs/${project.getName()}-${version}-sources.jar")
                 }
 
                 artifact androidSourcesJar

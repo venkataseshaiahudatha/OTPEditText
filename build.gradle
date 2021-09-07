@@ -27,6 +27,9 @@ nexusPublishing {
             nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
             snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
             packageGroup = PUBLISH_GROUP_ID
+            println(System.getenv('SONATYPE_STAGING_PROFILE_ID'))
+            println(System.getenv('OSSRH_USERNAME'))
+            println(System.getenv('OSSRH_PASSWORD'))
             stagingProfileId = System.getenv('SONATYPE_STAGING_PROFILE_ID')
             username = System.getenv('OSSRH_USERNAME')
             password = System.getenv('OSSRH_PASSWORD')
